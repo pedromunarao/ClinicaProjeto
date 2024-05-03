@@ -49,12 +49,12 @@ public class Mainframe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(59, 317, 100, 30);
+		btnNewButton.setBounds(324, 93, 100, 30);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("CLINICA");
 		lblNewLabel.setFont(new Font("Impact", Font.PLAIN, 50));
-		lblNewLabel.setBounds(256, 58, 223, 97);
+		lblNewLabel.setBounds(275, 11, 155, 97);
 		contentPane.add(lblNewLabel);
 	}
 }
