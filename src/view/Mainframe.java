@@ -49,12 +49,16 @@ public class Mainframe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+<<<<<<< HEAD:src/view/Mainframe.java
 		btnNewButton.setBounds(298, 165, 100, 30);
+=======
+		btnNewButton.setBounds(42, 302, 100, 30);
+>>>>>>> 6e840a7317e740b1018b09828df5df28e75e4912:src/clinica/gui/Mainframe.java
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("CLINICA");
 		lblNewLabel.setFont(new Font("Impact", Font.PLAIN, 50));
-		lblNewLabel.setBounds(256, 58, 223, 97);
+		lblNewLabel.setBounds(275, 11, 155, 97);
 		contentPane.add(lblNewLabel);
 	}
 }
