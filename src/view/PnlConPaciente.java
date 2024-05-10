@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import controller.PacienteController;
+//import controller.PacienteController;
 
 import domain.Paciente;
 
@@ -30,16 +30,16 @@ public class PnlConPaciente extends JPanel {
 		
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 		
-		ArrayList<Paciente> pacientes = new PacienteController.consultar();
-		table = new JTable(5, pacientes.size());
-		
-		for (int i=0; i < pacientes.size(); i++) {
-			String data = pacientes.get(i).getDataNasc().toString();
-			
-			modelo.addRow(new String[]{pacientes.get(i).getNome(), pacientes.get(i).getCpf(), data, pacientes.get(i).getRg(),
-					pacientes.get(i).getSexo(), pacientes.get(i).getTelefone().toString()});
-		}
-		
+//		ArrayList<Paciente> pacientes = new PacienteController.consultar();
+//		table = new JTable(5, pacientes.size());
+//		
+//		for (int i=0; i < pacientes.size(); i++) {
+//			String data = pacientes.get(i).getDataNasc().toString();
+//			
+//			modelo.addRow(new String[]{pacientes.get(i).getNome(), pacientes.get(i).getCpf(), data, pacientes.get(i).getRg(),
+//					pacientes.get(i).getSexo(), pacientes.get(i).getTelefone().toString()});
+//		}
+//		
 		table.setModel(modelo);
 		
 		scrollPane1.setViewportView(table);
