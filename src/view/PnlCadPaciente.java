@@ -87,7 +87,7 @@ public class PnlCadPaciente extends JPanel {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getItemAt(sexo.getSelectedIndex()).toString() ,Integer.parseInt(telefone.getText()));
+				Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getItemAt(sexo.getSelectedIndex()).toString() ,Long.parseLong(telefone.getText()));
 			
 			
 			}

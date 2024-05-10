@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class Paciente {
 	private String nome;
-    private String CPF;
+    private String Cpf;
     private Date dataNasc;
-    private String RG;
+    private String Rg;
     private String sexo;
-    private Integer telefone;
+    private Long telefone;
     
 	public Paciente() {
 		super();
 	}
 
-	public Paciente(String nome, String cPF, Date dataNasc, String rG, String sexo, Integer telefone) {
+	public Paciente(String nome, String cpf, Date dataNasc, String rg, String sexo, Long telefone) {
 		super();
 		this.nome = nome;
-		CPF = cPF;
+		Cpf = cpf;
 		this.dataNasc = dataNasc;
-		RG = rG;
+		Rg = rg;
 		this.sexo = sexo;
 		this.telefone = telefone;
 	}
@@ -32,12 +32,12 @@ public class Paciente {
 		this.nome = nome;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return Cpf;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		Cpf = cpf;
 	}
 
 	public Date getDataNasc() {
@@ -48,12 +48,12 @@ public class Paciente {
 		this.dataNasc = dataNasc;
 	}
 
-	public String getRG() {
-		return RG;
+	public String getRg() {
+		return Rg;
 	}
 
-	public void setRG(String rG) {
-		RG = rG;
+	public void setRg(String rg) {
+		Rg = rg;
 	}
 
 	public String getSexo() {
@@ -64,17 +64,17 @@ public class Paciente {
 		this.sexo = sexo;
 	}
 
-	public Integer getTelefone() {
+	public Long getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Integer telefone) {
-		this.telefone = telefone;
+	public void setTelefone(Long l) {
+		this.telefone = l;
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [nome=" + nome + ", CPF=" + CPF + ", dataNasc=" + dataNasc + ", RG=" + RG + ", sexo=" + sexo
+		return "Paciente [nome=" + nome + ", CPF=" + Cpf + ", dataNasc=" + dataNasc + ", RG=" + Rg + ", sexo=" + sexo
 				+ ", telefone=" + telefone + "]";
 	}
 	
