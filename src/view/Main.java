@@ -5,16 +5,14 @@ import java.awt.EventQueue;
 public class Main {
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadastroFrame frame = new CadastroFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		new Main().IniciarApp();
+		
+	}
+	
+	private void IniciarApp() {
+		FrmCadPaciente frame = new FrmCadPaciente();
+//		PrincipalFrame frame = new PrincipalFrame();
+		frame.setVisible(true);
 	}
 
 }
