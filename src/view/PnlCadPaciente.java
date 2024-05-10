@@ -30,7 +30,7 @@ public class PnlCadPaciente extends JPanel {
 	private JLabel lblRg;
 	private JTextField rg;
 	private JTextField telefone;
-	private JComboBox sexo;
+	private JComboBox<String> sexo;
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	PnlConPaciente pnlConPaciente;
@@ -70,9 +70,10 @@ public class PnlCadPaciente extends JPanel {
 		rg.setBounds(186, 89, 141, 23);
 		rg.setColumns(10);
 		
-		JComboBox cmbSexo = new JComboBox();
-		cmbSexo.setBounds(353, 89, 153, 24);
-		cmbSexo.setModel(new DefaultComboBoxModel(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
+		sexo = new JComboBox<String>();
+		sexo.setBounds(353, 89, 153, 24);
+		sexo.setModel(new DefaultComboBoxModel<String>(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
+		add(sexo); // Adicione ao painel
 		
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setBounds(353, 74, 70, 15);
@@ -102,7 +103,6 @@ public class PnlCadPaciente extends JPanel {
 		add(lblDataNasc);
 		add(lblRg);
 		add(rg);
-		add(cmbSexo);
 		add(lblSexo);
 		add(lblTelefone);
 		add(telefone);
