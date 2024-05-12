@@ -13,9 +13,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import domain.Paciente;
 import java.util.Date;
+import controller.PacienteController;
 
 public class PnlCadPaciente extends JPanel {
 	
@@ -88,8 +90,19 @@ public class PnlCadPaciente extends JPanel {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getItemAt(sexo.getSelectedIndex()).toString() ,Long.parseLong(telefone.getText()));
-			
+				try {
+					
+					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
+					PacienteController pacienteController = new PacienteController();
+					pacienteController.salvar(PnlCadPaciente.this);
+				}catch (Exception error) {
+					System.err.println("Não foi possível salvar, verifique os dados e tente novamente!");
+				}finally {
+					
+					FrmCadPaciente frame2 = new FrmCadPaciente();
+					frame2.setVisible(true);
+				}
+				
 			
 			}
 		});

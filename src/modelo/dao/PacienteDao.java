@@ -1,11 +1,16 @@
 package modelo.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import com.toedter.calendar.JCalendar;
+
 import domain.Paciente;
+import view.PnlCadPaciente;
 
 public class PacienteDao {
 	
@@ -19,7 +24,11 @@ public class PacienteDao {
 			PreparedStatement stmt = conexao.getConn().prepareStatement(sql);
 			stmt.setString(1, paciente.getNome());
 			stmt.setString(2, paciente.getCpf());
-			stmt.setString(3, paciente.getDataNasc().toString());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String dataNascimentoFormatted = dateFormat.format(paciente.getDataNasc());
+	        Date dataNascimento = Date.valueOf(dataNascimentoFormatted);
+	        
+	        stmt.setDate(3, dataNascimento);
 			stmt.setString(4, paciente.getRg());
 			stmt.setString(5, paciente.getSexo());
 			stmt.setLong(6, paciente.getTelefone());
@@ -29,6 +38,7 @@ public class PacienteDao {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public ArrayList<Paciente> consulta(){
@@ -48,7 +58,7 @@ public class PacienteDao {
 				paciente.setDataNasc(rs.getDate("datanasc"));
 				paciente.setRg(rs.getString("rg"));
 				paciente.setSexo(rs.getString("sexo"));
-				paciente.setTelefone(rs.getLong("telfone"));
+				paciente.setTelefone(rs.getLong("telefone"));
 				
 				pacientes.add(paciente);
 			}

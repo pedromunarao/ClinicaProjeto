@@ -35,7 +35,7 @@ public class FrmCadPaciente extends JFrame {
 	public FrmCadPaciente() {
 		setTitle("Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 418);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -44,7 +44,7 @@ public class FrmCadPaciente extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Cadastro de Pacientes", new PnlCadPaciente());
-		// tabbedPane.addTab("Consultar Pacientes", new PnlConPaciente());
+		 tabbedPane.addTab("Consultar Pacientes", new PnlConPaciente());
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
 

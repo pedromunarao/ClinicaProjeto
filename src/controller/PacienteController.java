@@ -17,8 +17,11 @@ public class PacienteController {
 		paciente.setCpf(pnl.getCpf().getText());
 		paciente.setDataNasc(pnl.getDataNasc().getDate());
 		paciente.setRg(pnl.getRg().getText());
-		paciente.setSexo(pnl.getSexo().getItemAt(pnl.getSexo().getSelectedIndex()).toString());
+		paciente.setSexo(pnl.getSexo().getSelectedItem().toString());
 		paciente.setTelefone(Long.parseLong(pnl.getTelefone().getText()));
+		
+		PacienteDao pacienteDao = new PacienteDao();
+		pacienteDao.salvar(paciente);
 	}
 	
 	public ArrayList<Paciente> consultar(){
