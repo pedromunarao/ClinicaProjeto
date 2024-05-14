@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -92,15 +94,18 @@ public class PnlCadPaciente extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
-					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
+//					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
 					PacienteController pacienteController = new PacienteController();
 					pacienteController.salvar(PnlCadPaciente.this);
+					
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
+		            if (frame instanceof FrmCadPaciente) {
+		                ((FrmCadPaciente) frame).closeAndOpen();
+		            }
+					
 				}catch (Exception error) {
 					System.err.println("Não foi possível salvar, verifique os dados e tente novamente!");
-				}finally {
-					
-					FrmCadPaciente frame2 = new FrmCadPaciente();
-					frame2.setVisible(true);
+					error.printStackTrace();
 				}
 				
 			

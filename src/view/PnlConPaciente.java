@@ -26,25 +26,30 @@ public class PnlConPaciente extends JPanel {
 		scrollPane1.setBounds(0, 12, 657, 435);
 		add(scrollPane1);
 		
-		String colunas[] = {"Nome", "CPF", "Data de Nascimento", "RG", "Sexo", "Telefone"};
-		
-		DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-		
-		ArrayList<Paciente> pacientes = new PacienteController().consultar();
-		table = new JTable(5, pacientes.size());
-		
-		for (int i=0; i < pacientes.size(); i++) {
-			String data = pacientes.get(i).getDataNasc().toString();
-			
-			modelo.addRow(new String[]{pacientes.get(i).getNome(), pacientes.get(i).getCpf(), data, pacientes.get(i).getRg(),
-					pacientes.get(i).getSexo(), pacientes.get(i).getTelefone().toString()});
-		}
-		
-		table.setModel(modelo);
+		atualizaTabela();
 		
 		scrollPane1.setViewportView(table);
 		
 
 	}
+	
+	public void atualizaTabela() {
+		String colunas[] = {"Nome", "CPF", "Data de Nascimento", "RG", "Sexo", "Telefone"};
+		DefaultTableModel model = new DefaultTableModel(colunas, 0);
+		table = new JTable(model);
+		
+		if (model.getRowCount() > 0) model.setRowCount(0);
+		
+		ArrayList<Paciente> pacientes = new PacienteController().consultar();
+		
+		for(Paciente paciente : pacientes) {
+			String data = paciente.getDataNasc().toString();
+			model.addRow(new String[] {paciente.getNome(), paciente.getCpf(), data, paciente.getRg(),
+                    paciente.getSexo(), paciente.getTelefone().toString()});
+			
+			
+		}
+	}
+	
 
 }
