@@ -14,12 +14,16 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import domain.Paciente;
 import java.util.Date;
 import controller.PacienteController;
+import javax.swing.JFormattedTextField;
+
 
 public class PnlCadPaciente extends JPanel {
 	
@@ -27,17 +31,18 @@ public class PnlCadPaciente extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField nome;
-	private JTextField cpf;
 	private JLabel lblCpf;
+	private JFormattedTextField cpf;
 	private JDateChooser dataNasc;
 	private JLabel lblDataNasc;
 	private JLabel lblRg;
-	private JTextField rg;
-	private JTextField telefone;
+	private JFormattedTextField rg;
+	private JFormattedTextField telefone;
 	private JComboBox<String> sexo;
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	PnlConPaciente pnlConPaciente;
+	
 	
 
 	/**
@@ -51,10 +56,6 @@ public class PnlCadPaciente extends JPanel {
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setBounds(12, 20, 70, 15);
-		
-		cpf = new JTextField();
-		cpf.setBounds(436, 36, 141, 23);
-		cpf.setColumns(10);
 		
 		lblCpf = new JLabel("CPF:");
 		lblCpf.setBounds(436, 20, 70, 15);
@@ -70,10 +71,6 @@ public class PnlCadPaciente extends JPanel {
 		lblRg = new JLabel("RG:");
 		lblRg.setBounds(186, 73, 70, 15);
 		
-		rg = new JTextField();
-		rg.setBounds(186, 89, 141, 23);
-		rg.setColumns(10);
-		
 		sexo = new JComboBox<String>();
 		sexo.setBounds(353, 89, 153, 24);
 		sexo.setModel(new DefaultComboBoxModel<String>(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
@@ -85,9 +82,7 @@ public class PnlCadPaciente extends JPanel {
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(12, 124, 70, 15);
 		
-		telefone = new JTextField();
-		telefone.setBounds(12, 140, 141, 23);
-		telefone.setColumns(10);
+		
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
@@ -115,19 +110,42 @@ public class PnlCadPaciente extends JPanel {
 		setLayout(null);
 		add(nome);
 		add(lblNome);
-		add(cpf);
 		add(lblCpf);
 		add(dataNasc);
 		add(lblDataNasc);
 		add(lblRg);
-		add(rg);
 		add(lblSexo);
 		add(lblTelefone);
-		add(telefone);
 		add(btnSalvar);
 		
-		
-		
+		try {
+            MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+            MaskFormatter rgMask = new MaskFormatter("##.###.###-#");
+            MaskFormatter telMask = new MaskFormatter("(##)#####-####");
+            
+            cpfMask.setPlaceholderCharacter('_');
+            cpf = new JFormattedTextField(cpfMask); 
+            cpf.setName("cpf");
+            cpf.setBounds(436, 38, 141, 23);
+            add(cpf);
+            
+            rgMask.setPlaceholderCharacter('_');
+            rg = new JFormattedTextField(rgMask);
+            rg.setName("rg");
+            rg.setBounds(186, 89, 141, 23);
+            add(rg);
+            
+            telMask.setPlaceholderCharacter('_');
+            telefone = new JFormattedTextField(telMask);
+            telefone.setName("telefone");
+            telefone.setBounds(12, 140, 141, 23);
+            add(telefone);
+    		telefone.setColumns(10);
+    		
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+			
 		
 		
 
@@ -144,12 +162,12 @@ public class PnlCadPaciente extends JPanel {
 	}
 
 
-	public JTextField getCpf() {
+	public JFormattedTextField getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(JTextField cpf) {
+	public void setCpf(JFormattedTextField cpf) {
 		this.cpf = cpf;
 	}
 
@@ -164,22 +182,22 @@ public class PnlCadPaciente extends JPanel {
 	}
 
 
-	public JTextField getRg() {
+	public JFormattedTextField getRg() {
 		return rg;
 	}
 
 
-	public void setRg(JTextField rg) {
+	public void setRg(JFormattedTextField rg) {
 		this.rg = rg;
 	}
 
 
-	public JTextField getTelefone() {
+	public JFormattedTextField getTelefone() {
 		return telefone;
 	}
 
 
-	public void setTelefone(JTextField telefone) {
+	public void setTelefone(JFormattedTextField telefone) {
 		this.telefone = telefone;
 	}
 	
