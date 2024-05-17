@@ -6,7 +6,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/home/cavassinigomes/Downloads/mysql-connector-j-8.3.0/mysql-connector-j-8.3.0.jar"/>
-	<classpathentry kind="lib" path="/home/cavassinigomes/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-j-8.3.0.jar"/>
+	<classpathentry kind="lib" path="com.jgoodies.forms_1.9.0.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="com.jgoodies.common_1.8.1.v20240327-0800.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
