@@ -20,8 +20,9 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTree;
+import java.awt.Color;
 
-public class PrincipalFrame extends JFrame {
+public class FrmPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -34,7 +35,7 @@ public class PrincipalFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PrincipalFrame frame = new PrincipalFrame();
+					FrmPrincipal frame = new FrmPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,12 +47,12 @@ public class PrincipalFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PrincipalFrame() {
+	public FrmPrincipal() {
 		setTitle("Principal");
-		setDefaultCloseOperation(PrincipalFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 768);
+		setDefaultCloseOperation(FrmPrincipal.EXIT_ON_CLOSE);
+		setBounds(400, 100, 1024, 768);
 		contentPane = new JPanel();
-		contentPane.setAlignmentY(Component.TOP_ALIGNMENT);
+		contentPane.setAlignmentY(Component.CENTER_ALIGNMENT);
 		contentPane.setBackground(UIManager.getColor("Menu.acceleratorForeground"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -68,6 +69,54 @@ public class PrincipalFrame extends JFrame {
 		panel.add(PnlCadastro);
 		PnlCadastro.setLayout(null);
 		
+		
+		JPanel PnlExame = new JPanel();
+		PnlExame.setBounds(95, 0, 94, 41);
+		panel.add(PnlExame);
+		PnlExame.setLayout(null);
+		
+		JLabel lblExame = new JLabel("Exames");
+		lblExame.setBounds(16, 12, 58, 15);
+		PnlExame.add(lblExame);
+		
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setBounds(191, 0, 94, 41);
+		panel.add(panel_1_2);
+		
+		JPanel PnlCadastros = new JPanel();
+		PnlCadastros.setVisible(false);
+		PnlCadastros.setBounds(0, 40, 126, 93);
+		contentPane.add(PnlCadastros);
+		PnlCadastros.setLayout(null);
+		
+		JPanel PnlPacientes = new JPanel();
+		PnlPacientes.setBounds(0, 10, 126, 37);
+		PnlCadastros.add(PnlPacientes);
+		PnlPacientes.setLayout(null);
+		
+		JLabel LblPacientes = new JLabel("Pacientes");
+		LblPacientes.setBounds(26, 12, 70, 15);
+		PnlPacientes.add(LblPacientes);
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setLayout(null);
+		panel_1_1.setBounds(0, 47, 126, 37);
+		PnlCadastros.add(panel_1_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Usuários");
+		lblNewLabel_1.setBounds(26, 12, 70, 15);
+		panel_1_1.add(lblNewLabel_1);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(25, 25, 112));
+		panel_3.setBounds(0, 0, 126, 10);
+		PnlCadastros.add(panel_3);
+		
+		JPanel panel_3_1 = new JPanel();
+		panel_3_1.setBackground(new Color(25, 25, 112));
+		panel_3_1.setBounds(0, 83, 126, 10);
+		PnlCadastros.add(panel_3_1);
+		
 		JLabel lblCadastro = new JLabel("Cadastro");
 		lblCadastro.addMouseListener(new MouseAdapter() {
 			@Override
@@ -83,34 +132,18 @@ public class PrincipalFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(frmCadPaciente == null || !frmCadPaciente.isVisible()) {
-					frmCadPaciente = new FrmCadPaciente();
-					frmCadPaciente.setVisible(true);
-				}else {
-					frmCadPaciente.toFront();
-					frmCadPaciente.requestFocus();
+				if(PnlCadastros.isVisible()) {
+					PnlCadastros.setVisible(false);
 				}
+				else {
+					PnlCadastros.setVisible(true);
+				}
+				
 			}
 		});
-		lblCadastro.setBounds(12, 12, 70, 15);
-		PnlCadastro.add(lblCadastro);
+			lblCadastro.setBounds(12, 12, 70, 15);
+			PnlCadastro.add(lblCadastro);
 		
-		JPanel PnlExame = new JPanel();
-		PnlExame.setBounds(95, 0, 94, 41);
-		panel.add(PnlExame);
-		PnlExame.setLayout(null);
-		
-		JLabel lblExame = new JLabel("Exames");
-		lblExame.setBounds(16, 12, 58, 15);
-		PnlExame.add(lblExame);
-		
-		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setBounds(191, 0, 94, 41);
-		panel.add(panel_1_2);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(77, 91, 10, 10);
-		contentPane.add(panel_2);
 		
 		PnlCadastro.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,6 +158,19 @@ public class PrincipalFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(PnlCadastros.isVisible()) {
+					PnlCadastros.setVisible(false);
+				}
+				else {
+					PnlCadastros.setVisible(true);
+				}
+				
+			}
+		});
+		
+		PnlPacientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				if(frmCadPaciente == null || !frmCadPaciente.isVisible()) {
 					frmCadPaciente = new FrmCadPaciente();
 					frmCadPaciente.setVisible(true);
@@ -132,6 +178,17 @@ public class PrincipalFrame extends JFrame {
 					frmCadPaciente.toFront();
 					frmCadPaciente.requestFocus();
 				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				LblPacientes.setForeground(getForeground().WHITE);
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				LblPacientes.setForeground(getForeground().BLACK);
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 				
 			}
 		});

@@ -11,7 +11,7 @@ public class Main {
 	
 	private void IniciarApp() {
 //		FrmCadPaciente frame = new FrmCadPaciente();
-		PrincipalFrame frame = new PrincipalFrame();
+		FrmPrincipal frame = new FrmPrincipal();
 		frame.setVisible(true);
 	}
 
