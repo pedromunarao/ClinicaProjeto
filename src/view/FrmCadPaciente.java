@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
+import javax.swing.JButton;
 
 public class FrmCadPaciente extends JFrame {
 
@@ -45,11 +46,11 @@ public class FrmCadPaciente extends JFrame {
 		setContentPane(contentPane);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		PnlCadPaciente pnlCadPaciente = new PnlCadPaciente();
 		PnlConPaciente pnlConPaciente = new PnlConPaciente();
-		tabbedPane.addTab("Cadastro de Pacientes", pnlCadPaciente);
 		tabbedPane.addTab("Consultar Pacientes", pnlConPaciente);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		PnlCadPaciente pnlCadPaciente_1 = new PnlCadPaciente();
+		tabbedPane.addTab("Cadastro de Pacientes", pnlCadPaciente_1);
 	}
 
 	public void closeAndOpen() {
