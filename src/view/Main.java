@@ -10,8 +10,8 @@ public class Main {
 	}
 	
 	private void IniciarApp() {
-		FrmCadPaciente frame = new FrmCadPaciente();
-//		PrincipalFrame frame = new PrincipalFrame();
+//		FrmCadPaciente frame = new FrmCadPaciente();
+		FrmPrincipal frame = new FrmPrincipal();
 		frame.setVisible(true);
 	}
 
