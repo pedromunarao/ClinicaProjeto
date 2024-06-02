@@ -7,6 +7,7 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -17,10 +18,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.text.MaskFormatter;
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import domain.Paciente;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import controller.PacienteController;
 import javax.swing.JFormattedTextField;
 
@@ -42,6 +47,11 @@ public class PnlCadPaciente extends JPanel {
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	PnlConPaciente pnlConPaciente;
+	private JTextField logradouro;
+	private JTextField bairro;
+	private JTextField numero;
+	private JTextField complemento;
+	private JFormattedTextField cep ;
 	
 	
 
@@ -85,28 +95,7 @@ public class PnlCadPaciente extends JPanel {
 		
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					
-//					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
-					PacienteController pacienteController = new PacienteController();
-					pacienteController.salvar(PnlCadPaciente.this);
-					
-					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
-		            if (frame instanceof FrmCadPaciente) {
-		                ((FrmCadPaciente) frame).closeAndOpen();
-		            }
-					
-				}catch (Exception error) {
-					System.err.println("Não foi possível salvar, verifique os dados e tente novamente!");
-					error.printStackTrace();
-				}
-				
-			
-			}
-		});
-		btnSalvar.setBounds(460, 190, 117, 25);
+		btnSalvar.setBounds(460, 297, 117, 25);
 		setLayout(null);
 		add(nome);
 		add(lblNome);
@@ -122,6 +111,7 @@ public class PnlCadPaciente extends JPanel {
             MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
             MaskFormatter rgMask = new MaskFormatter("##.###.###-#");
             MaskFormatter telMask = new MaskFormatter("(##)#####-####");
+            MaskFormatter cepMask = new MaskFormatter("##.###-###");
             
             cpfMask.setPlaceholderCharacter('_');
             cpf = new JFormattedTextField(cpfMask); 
@@ -142,11 +132,86 @@ public class PnlCadPaciente extends JPanel {
             add(telefone);
     		telefone.setColumns(10);
     		
+    		cepMask.setPlaceholderCharacter('_');
+    		cep = new JFormattedTextField(cepMask);
+    		cep.setName("cep");
+    		cep.setBounds(353, 237, 141, 23);
+    		add(cep);
+    		
+    		JLabel lblCep = new JLabel("Cep:");
+    		lblCep.setBounds(353, 219, 70, 15);
+    		add(lblCep);
+    		
         } catch (Exception e) {
             e.printStackTrace();
         }
-			
 		
+		JLabel lblLogradouro = new JLabel("Logradouro:");
+		lblLogradouro.setBounds(12, 175, 100, 15);
+		add(lblLogradouro);
+		
+		logradouro = new JTextField();
+		logradouro.setColumns(10);
+		logradouro.setBounds(12, 191, 315, 23);
+		add(logradouro);
+		
+		JLabel lblBairro = new JLabel("Bairro:");
+		lblBairro.setBounds(353, 175, 70, 15);
+		add(lblBairro);
+		
+		bairro = new JTextField();
+		bairro.setColumns(10);
+		bairro.setBounds(353, 191, 224, 23);
+		add(bairro);
+		
+		JLabel lblNumero = new JLabel("Número:");
+		lblNumero.setBounds(12, 221, 70, 15);
+		add(lblNumero);
+		
+		numero = new JTextField();
+		numero.setColumns(10);
+		numero.setBounds(12, 237, 60, 23);
+		add(numero);
+		
+		JLabel lblComplemento = new JLabel("Complemento:");
+		lblComplemento.setBounds(92, 221, 130, 15);
+		add(lblComplemento);
+		
+		complemento = new JTextField();
+		complemento.setColumns(10);
+		complemento.setBounds(92, 237, 233, 23);
+		add(complemento);
+			
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					if (!verificaTextField(nome)) return;
+										
+					if (!verificaFormattedField(cpf)) return;
+					
+//					if (!verificaFormattedField(rg)) return;
+		
+					
+					
+//					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
+					PacienteController pacienteController = new PacienteController();
+					pacienteController.salvar(PnlCadPaciente.this);
+					
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
+		            if (frame instanceof FrmCadPaciente) {
+		                ((FrmCadPaciente) frame).closeAndOpen();
+		            }
+					
+				}catch (Exception error) {
+					System.err.println("Não foi possível salvar, verifique os dados e tente novamente!");
+					error.printStackTrace();
+				}
+				
+			
+			}
+		});
 		
 
 	}
@@ -207,5 +272,85 @@ public class PnlCadPaciente extends JPanel {
 	
 	public void setSexo(JComboBox sexo) {
 		this.sexo = sexo;
+	}
+	
+	
+	
+	public JTextField getLogradouro() {
+		return logradouro;
+	}
+
+
+	public void setLogradouro(JTextField logradouro) {
+		this.logradouro = logradouro;
+	}
+
+
+	public JTextField getBairro() {
+		return bairro;
+	}
+
+
+	public void setBairro(JTextField bairro) {
+		this.bairro = bairro;
+	}
+
+
+	public JTextField getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(JTextField numero) {
+		this.numero = numero;
+	}
+
+
+	public JFormattedTextField getCep() {
+		return cep;
+	}
+
+
+	public void setCep(JFormattedTextField cep) {
+		this.cep = cep;
+	}
+
+
+	public JTextField getComplemento() {
+		return complemento;
+	}
+
+
+	public void setComplemento(JTextField complemento) {
+		this.complemento = complemento;
+	}
+
+
+	public boolean verificaTextField(JTextField texto) {
+		Pattern padrao = Pattern.compile("\\d+");
+		Matcher verificador = padrao.matcher(texto.getText());
+		
+		if (texto.getText().isBlank() || verificador.find()) {
+			JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo nome do paciente está inválido, verifique os campos e tente novamente!");
+			texto.requestFocusInWindow();
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public boolean verificaFormattedField(JFormattedTextField texto) {
+		 String inputText = cpf.getText().trim();
+	     String cpfNumeros = inputText.replaceAll("[^0-9]", "");
+		
+		if (cpfNumeros.length() != 11) {
+			JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +texto.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
+			texto.requestFocusInWindow();
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }

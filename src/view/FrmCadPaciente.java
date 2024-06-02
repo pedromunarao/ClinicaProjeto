@@ -45,11 +45,13 @@ public class FrmCadPaciente extends JFrame {
 		setContentPane(contentPane);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		PnlConPaciente pnlConPaciente = new PnlConPaciente();
-		tabbedPane.addTab("Consultar Pacientes", pnlConPaciente);
+		
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		PnlCadPaciente pnlCadPaciente_1 = new PnlCadPaciente();
+		PnlConPaciente pnlConPaciente = new PnlConPaciente();
 		tabbedPane.addTab("Cadastro de Pacientes", pnlCadPaciente_1);
+		tabbedPane.addTab("Consultar Pacientes", pnlConPaciente);
+		
 	}
 
 	public void closeAndOpen() {

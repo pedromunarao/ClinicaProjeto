@@ -50,7 +50,7 @@ public class FrmPrincipal extends JFrame {
 	public FrmPrincipal() {
 		setTitle("Principal");
 		setDefaultCloseOperation(FrmPrincipal.EXIT_ON_CLOSE);
-		setBounds(400, 100, 1024, 768);
+		setBounds(400, 100, 1360, 768);
 		contentPane = new JPanel();
 		contentPane.setAlignmentY(Component.CENTER_ALIGNMENT);
 		contentPane.setBackground(UIManager.getColor("Menu.acceleratorForeground"));
@@ -60,7 +60,7 @@ public class FrmPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1024, 41);
+		panel.setBounds(0, 0, 1360, 41);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		

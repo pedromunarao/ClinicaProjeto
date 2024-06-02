@@ -17,8 +17,8 @@ public class PacienteDao {
 	public void salvar(Paciente paciente) {
 		Conexao conexao = new Conexao();
 		String sql = "INSERT INTO " +
-					"pacientes (nome, cpf, dataNasc, rg, sexo, telefone) " +
-					"VALUES (?,?,?,?,?,?)";
+					"pacientes (nome, cpf, dataNasc, rg, sexo, telefone, logradouro, bairro, numero, complemento, cep) " +
+					"VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			PreparedStatement stmt = conexao.getConn().prepareStatement(sql);
@@ -32,6 +32,11 @@ public class PacienteDao {
 			stmt.setString(4, paciente.getRg());
 			stmt.setString(5, paciente.getSexo());
 			stmt.setLong(6, paciente.getTelefone());
+			stmt.setString(7, paciente.getLogradouro());
+			stmt.setString(8, paciente.getBairro());
+			stmt.setString(9, paciente.getNumero());
+			stmt.setString(10, paciente.getComplemento());
+			stmt.setString(11, paciente.getCep());
 			
 			stmt.execute();
 			stmt.close();
@@ -59,6 +64,11 @@ public class PacienteDao {
 				paciente.setRg(rs.getString("rg"));
 				paciente.setSexo(rs.getString("sexo"));
 				paciente.setTelefone(rs.getLong("telefone"));
+				paciente.setLogradouro(rs.getString("logradouro"));
+				paciente.setBairro(rs.getString("bairro"));
+				paciente.setNumero(rs.getString("numero"));
+				paciente.setComplemento(rs.getString("complemento"));
+				paciente.setCep(rs.getString("cep"));
 				
 				pacientes.add(paciente);
 			}

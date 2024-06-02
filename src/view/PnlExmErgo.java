@@ -54,7 +54,7 @@ public class PnlExmErgo extends JPanel {
 		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblHora.setBounds(389, 41, 33, 13);
+		lblHora.setBounds(389, 41, 46, 13);
 		add(lblHora);
 		
 		textField_2 = new JTextField();
@@ -144,28 +144,28 @@ public class PnlExmErgo extends JPanel {
 		
 		JLabel lblFumw = new JLabel("Fumante?");
 		lblFumw.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblFumw.setBounds(212, 206, 60, 13);
+		lblFumw.setBounds(212, 206, 82, 13);
 		add(lblFumw);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Sim");
-		chckbxNewCheckBox.setBounds(311, 203, 46, 21);
+		chckbxNewCheckBox.setBounds(311, 203, 77, 21);
 		add(chckbxNewCheckBox);
 		
 		JCheckBox chckbxNo = new JCheckBox("Não");
-		chckbxNo.setBounds(359, 203, 46, 21);
+		chckbxNo.setBounds(405, 202, 77, 21);
 		add(chckbxNo);
 		
 		JLabel lblMarcaPasso = new JLabel("Marca Passo?");
 		lblMarcaPasso.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblMarcaPasso.setBounds(212, 237, 82, 13);
+		lblMarcaPasso.setBounds(212, 237, 100, 13);
 		add(lblMarcaPasso);
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Sim");
-		chckbxNewCheckBox_1.setBounds(311, 234, 46, 21);
+		chckbxNewCheckBox_1.setBounds(311, 234, 77, 21);
 		add(chckbxNewCheckBox_1);
 		
 		JCheckBox chckbxNo_1 = new JCheckBox("Não");
-		chckbxNo_1.setBounds(359, 234, 46, 21);
+		chckbxNo_1.setBounds(405, 234, 94, 21);
 		add(chckbxNo_1);
 		
 		JLabel lblSolicitante = new JLabel("Solicitante:");
