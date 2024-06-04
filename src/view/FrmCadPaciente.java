@@ -17,6 +17,7 @@ public class FrmCadPaciente extends JFrame {
 	PnlCadPaciente pnlCadPaciente = new PnlCadPaciente();
 
 	/**
+	 * 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {

@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class PnlExmErgo extends JPanel {
 
@@ -151,10 +152,6 @@ public class PnlExmErgo extends JPanel {
 		chckbxNewCheckBox.setBounds(311, 203, 46, 21);
 		add(chckbxNewCheckBox);
 		
-		JCheckBox chckbxNo = new JCheckBox("Não");
-		chckbxNo.setBounds(359, 203, 46, 21);
-		add(chckbxNo);
-		
 		JLabel lblMarcaPasso = new JLabel("Marca Passo?");
 		lblMarcaPasso.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblMarcaPasso.setBounds(212, 237, 82, 13);
@@ -163,10 +160,6 @@ public class PnlExmErgo extends JPanel {
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Sim");
 		chckbxNewCheckBox_1.setBounds(311, 234, 46, 21);
 		add(chckbxNewCheckBox_1);
-		
-		JCheckBox chckbxNo_1 = new JCheckBox("Não");
-		chckbxNo_1.setBounds(359, 234, 46, 21);
-		add(chckbxNo_1);
 		
 		JLabel lblSolicitante = new JLabel("Solicitante:");
 		lblSolicitante.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -187,6 +180,11 @@ public class PnlExmErgo extends JPanel {
 		txtLk.setBounds(29, 380, 427, 138);
 		add(txtLk);
 		txtLk.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Salvar");
+		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 12));
+		btnNewButton.setBounds(560, 476, 85, 21);
+		add(btnNewButton);
 
 	}
 }
