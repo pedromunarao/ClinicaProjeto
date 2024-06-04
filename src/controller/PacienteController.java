@@ -22,6 +22,11 @@ public class PacienteController {
 		paciente.setRg(pnl.getRg().getText());
 		paciente.setSexo(pnl.getSexo().getSelectedItem().toString());
 		paciente.setTelefone(Long.parseLong(telefoneLimpo));
+		paciente.setLogradouro(pnl.getLogradouro().getText());
+		paciente.setBairro(pnl.getBairro().getText());
+		paciente.setComplemento(pnl.getComplemento().getText());
+		paciente.setNumero(pnl.getNumero().getText());
+		paciente.setCep(pnl.getCep().getText());
 		
 		PacienteDao pacienteDao = new PacienteDao();
 		pacienteDao.salvar(paciente);

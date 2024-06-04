@@ -4,11 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
-import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 
 public class PnlExmErgo extends JPanel {
@@ -55,7 +53,7 @@ public class PnlExmErgo extends JPanel {
 		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblHora.setBounds(389, 41, 33, 13);
+		lblHora.setBounds(389, 41, 46, 13);
 		add(lblHora);
 		
 		textField_2 = new JTextField();
@@ -119,7 +117,7 @@ public class PnlExmErgo extends JPanel {
 		add(lblSexo);
 		
 		JComboBox<String> sexo = new JComboBox<String>();
-		sexo.setModel(new DefaultComboBoxModel(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
+		sexo.setModel(new DefaultComboBoxModel<String>(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
 		sexo.setBounds(492, 128, 153, 24);
 		add(sexo);
 		
@@ -145,20 +143,20 @@ public class PnlExmErgo extends JPanel {
 		
 		JLabel lblFumw = new JLabel("Fumante?");
 		lblFumw.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblFumw.setBounds(212, 206, 60, 13);
+		lblFumw.setBounds(212, 206, 82, 13);
 		add(lblFumw);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Sim");
-		chckbxNewCheckBox.setBounds(311, 203, 46, 21);
+		chckbxNewCheckBox.setBounds(311, 203, 77, 21);
 		add(chckbxNewCheckBox);
 		
 		JLabel lblMarcaPasso = new JLabel("Marca Passo?");
 		lblMarcaPasso.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblMarcaPasso.setBounds(212, 237, 82, 13);
+		lblMarcaPasso.setBounds(212, 237, 100, 13);
 		add(lblMarcaPasso);
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Sim");
-		chckbxNewCheckBox_1.setBounds(311, 234, 46, 21);
+		chckbxNewCheckBox_1.setBounds(311, 234, 77, 21);
 		add(chckbxNewCheckBox_1);
 		
 		JLabel lblSolicitante = new JLabel("Solicitante:");

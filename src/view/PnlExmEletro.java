@@ -166,7 +166,6 @@ public class PnlExmEletro extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		panel.setToolTipText("");
 		panel.setBounds(26, 260, 633, 248);
 		add(panel);
