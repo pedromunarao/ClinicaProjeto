@@ -14,7 +14,8 @@ public class FrmCadPaciente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	PnlCadPaciente pnlCadPaciente = new PnlCadPaciente();
+	private PnlCadPaciente pnlCadPaciente = new PnlCadPaciente();
+	private JTabbedPane tabbedPane;
 
 	/**
 	 * 
@@ -45,20 +46,38 @@ public class FrmCadPaciente extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		PnlCadPaciente pnlCadPaciente_1 = new PnlCadPaciente();
-		PnlConPaciente pnlConPaciente = new PnlConPaciente();
+		PnlConPaciente pnlConPaciente = new PnlConPaciente(pnlCadPaciente_1);
 		tabbedPane.addTab("Cadastro de Pacientes", pnlCadPaciente_1);
 		tabbedPane.addTab("Consultar Pacientes", pnlConPaciente);
 		
 	}
 
-	public void closeAndOpen() {
+	public void closeAndOpenSuccess() {
 		dispose();
 		JOptionPane.showMessageDialog(pnlCadPaciente, "Dados Salvos com sucesso!");
 		FrmCadPaciente novoFrame = new FrmCadPaciente();
 		novoFrame.setVisible(true);
 	}
+	
+	public void closeAndOpen() {
+		dispose();
+		FrmCadPaciente novoFrame = new FrmCadPaciente();
+		novoFrame.setVisible(true);
+	}
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
+	
+	
+	
+	
 }

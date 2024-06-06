@@ -1,8 +1,11 @@
 package domain;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class Paciente {
+	private Integer id;
 	private String nome;
     private String Cpf;
     private Date dataNasc;
@@ -19,7 +22,7 @@ public class Paciente {
 		super();
 	}
 
-	public Paciente(String nome, String cpf, Date dataNasc, String rg, String sexo, Long telefone, String logradouro, String bairro, String numero, String complemento, String cep) {
+	public Paciente( String nome, String cpf, Date dataNasc, String rg, String sexo, Long telefone, String logradouro, String bairro, String numero, String complemento, String cep) {
 		super();
 		this.nome = nome;
 		Cpf = cpf;
@@ -32,6 +35,14 @@ public class Paciente {
 		this.numero = numero;
 		this.complemento = complemento;
 		this.cep = cep;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -128,6 +139,8 @@ public class Paciente {
 				+ ", telefone=" + telefone + ", logradouro=" + logradouro + ", bairro=" + bairro + ", numero=" + numero
 				+ ", complemento=" + complemento + ", cep=" + cep + "]";
 	}
+	
+	
 	
     
 }

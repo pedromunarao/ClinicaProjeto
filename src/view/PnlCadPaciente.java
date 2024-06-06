@@ -20,6 +20,8 @@ import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.awt.event.ActionEvent;
 import domain.Paciente;
 import java.util.Date;
@@ -52,13 +54,18 @@ public class PnlCadPaciente extends JPanel {
 	private JTextField numero;
 	private JTextField complemento;
 	private JFormattedTextField cep ;
-	
+	protected boolean editando;
+	private JTextField codigo;
+	private JButton btnExcluir;
+	private JButton btnCancelar;
 	
 
 	/**
 	 * Create the panel.
 	 */
 	public PnlCadPaciente() {
+		
+		editando = false;
 		
 		nome = new JTextField();
 		nome.setBounds(12, 36, 400, 23);
@@ -71,6 +78,7 @@ public class PnlCadPaciente extends JPanel {
 		lblCpf.setBounds(436, 20, 70, 15);
 		
 		dataNasc = new JDateChooser();
+		dataNasc.setName("Data de Nascimento");
 		dataNasc.setBounds(12, 89, 141, 23);
 		dataNasc.setToolTipText("");
 		dataNasc.setDateFormatString("dd/MM/yyyy");
@@ -82,7 +90,7 @@ public class PnlCadPaciente extends JPanel {
 		lblRg.setBounds(186, 73, 70, 15);
 		
 		sexo = new JComboBox<String>();
-		sexo.setBounds(353, 89, 153, 24);
+		sexo.setBounds(353, 89, 153, 23);
 		sexo.setModel(new DefaultComboBoxModel<String>(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
 		add(sexo); // Adicione ao painel
 		
@@ -181,31 +189,85 @@ public class PnlCadPaciente extends JPanel {
 		complemento.setColumns(10);
 		complemento.setBounds(92, 237, 233, 23);
 		add(complemento);
+		
+		codigo = new JTextField();
+		codigo.setVisible(false);
+		codigo.setBounds(593, 38, 114, 19);
+		add(codigo);
+		codigo.setColumns(10);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setVisible(false);
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					PacienteController pacienteController = new PacienteController();
+					
+					if (editando = true) {
+						pacienteController.excluirPaciente(PnlCadPaciente.this);
+						
+					}
+					
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
+		            if (frame instanceof FrmCadPaciente) {
+		                ((FrmCadPaciente) frame).closeAndOpenSuccess();
+		            }
+					
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(PnlCadPaciente.this, "Não foi possível excluir, tente novamente!");
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnExcluir.setBounds(331, 297, 117, 25);
+		add(btnExcluir);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (editando = true) {
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
+		            if (frame instanceof FrmCadPaciente) {
+		                ((FrmCadPaciente) frame).closeAndOpenSuccess();
+		            }
+				}
+			}
+		});
+		btnCancelar.setBounds(202, 297, 117, 25);
+		add(btnCancelar);
+		
 			
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					
-					if (!verificaTextField(nome)) return;
-										
-					if (!verificaFormattedField(cpf)) return;
-					
-//					if (!verificaFormattedField(rg)) return;
-		
-					
-					
-//					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
 					PacienteController pacienteController = new PacienteController();
-					pacienteController.salvar(PnlCadPaciente.this);
 					
-					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
-		            if (frame instanceof FrmCadPaciente) {
-		                ((FrmCadPaciente) frame).closeAndOpen();
-		            }
+					
+					if (!verificaTextField(nome)) return;
+											
+					if (!verificaFormattedField(cpf)) return;
+						
+					if (!verificaFormattedField(rg)) return;
+					
+					if (!verificaData(dataNasc)) return;
+					
+					if (!verificaFormattedField(telefone)) return;
+						
+	//					Paciente paciente = new Paciente(nome.getText(), cpf.getText(), dataNasc.getDate(), rg.getText(), sexo.getSelectedItem().toString() ,Long.parseLong(telefone.getText()));
+					
+					if (editando == false) {
+						pacienteController.salvar(PnlCadPaciente.this);
+					}
+					else if (editando == true){
+						pacienteController.atualizaPaciente(PnlCadPaciente.this);
+					}
+					
 					
 				}catch (Exception error) {
-					System.err.println("Não foi possível salvar, verifique os dados e tente novamente!");
+					JOptionPane.showMessageDialog(PnlCadPaciente.this, "Não foi possível salvar, verifique os dados e tente novamente!");
 					error.printStackTrace();
 				}
 				
@@ -217,6 +279,14 @@ public class PnlCadPaciente extends JPanel {
 	}
 
 
+	public JTextField getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(JTextField codigo) {
+		this.codigo = codigo;
+	}
+	
 	public JTextField getNome() {
 		return nome;
 	}
@@ -341,16 +411,56 @@ public class PnlCadPaciente extends JPanel {
 	}
 	
 	public boolean verificaFormattedField(JFormattedTextField texto) {
-		 String inputText = cpf.getText().trim();
+		 String inputText =	texto.getText().trim();
 	     String cpfNumeros = inputText.replaceAll("[^0-9]", "");
+	    
+	    if (texto.getName().equalsIgnoreCase("cpf")) { 
+	     
+			if (cpfNumeros.length() != 11) {
+				JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +texto.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
+				texto.requestFocusInWindow();
+				return false;
+			}
+	    }
+	    
+	    if(texto.getName().equalsIgnoreCase("rg")) {
+	    	if(cpfNumeros.length() != 9) {
+	    		JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +texto.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
+				texto.requestFocusInWindow();
+				return false;
+	    	}
+	    }
+	    
+	    if(texto.getName().equalsIgnoreCase("telefone")) {
+	    	if(cpfNumeros.length() != 11) {
+	    		JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +texto.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
+				texto.requestFocusInWindow();
+				return false;
+	    	}
+	    }
 		
-		if (cpfNumeros.length() != 11) {
-			JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +texto.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
-			texto.requestFocusInWindow();
+		return true;
+		
+	}
+	
+	public boolean verificaData(JDateChooser data) {
+		Date dataValida = data.getDate();
+		LocalDate hoje = LocalDate.now();
+		Date dataHoje = Date.from(hoje.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		if (dataValida == null || dataValida.after(dataHoje)) {
+			JOptionPane.showMessageDialog(PnlCadPaciente.this, "O campo " +data.getName()+ " do paciente está inválido, verifique os campos e tente novamente!");
+			data.requestFocusInWindow();
 			return false;
 		}
-		else {
-			return true;
+		
+		return true;
+	}
+	
+	public void mudaBotão() {
+		if (editando = true) {
+			btnExcluir.setVisible(true);
+			btnCancelar.setVisible(true);
 		}
 	}
 }
