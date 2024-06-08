@@ -19,7 +19,7 @@ import view.PnlCadPaciente;
 public class PacienteController {
 	
 	private Paciente paciente;
-	PacienteDao pacienteDao = new PacienteDao();
+	private PacienteDao pacienteDao;
 
 	
 	public void salvar(PnlCadPaciente pnl) {

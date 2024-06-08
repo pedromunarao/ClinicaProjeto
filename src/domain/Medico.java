@@ -1,5 +1,6 @@
 package domain;
 
+import enums.UsuarioEnum;
 
 public class Medico extends Usuario {
 	private String especializacao;
@@ -7,10 +8,15 @@ public class Medico extends Usuario {
     
 	public Medico() {
 		super();
+		setTipo(UsuarioEnum.MEDICO);
+	}
+	
+	public Medico(String nome, String usuario, String senha, UsuarioEnum tipo) {
+		super(nome, usuario, senha, tipo);
 	}
 
-	public Medico(String especializacao, String crm) {
-		super();
+	public Medico(String nome, String usuario, String senha, UsuarioEnum tipo, String especializacao, String crm) {
+		super(nome, usuario , senha, tipo );
 		this.especializacao = especializacao;
 		this.crm = crm;
 	}

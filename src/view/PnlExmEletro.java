@@ -23,21 +23,24 @@ import java.awt.Color;
 import javax.swing.JSpinner;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
 
 public class PnlExmEletro extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField nExame;
-	private JTextField data;
 	private JTextField hora;
 	private JTextField codigoPaciente;
 	private JTextField nome;
 	private JTextField telefone;
-	private JTextField textField_6;
+	private JTextField convenio;
 	private JTextField altura;
 	private JTextField peso;
 	private JTextField idade;
 	private JTextField solicitante;
+	private JDateChooser dataNasc; 
+	private JTextField sexo;
 
 	/**
 	 * Create the panel.
@@ -60,19 +63,14 @@ public class PnlExmEletro extends JPanel {
 		lblData.setBounds(119, 23, 40, 13);
 		add(lblData);
 		
-		data = new JTextField();
-		data.setColumns(10);
-		data.setBounds(119, 37, 67, 23);
-		add(data);
-		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblHora.setBounds(210, 23, 40, 13);
+		lblHora.setBounds(276, 23, 40, 13);
 		add(lblHora);
 		
 		hora = new JTextField();
 		hora.setColumns(10);
-		hora.setBounds(210, 37, 67, 23);
+		hora.setBounds(276, 37, 67, 23);
 		add(hora);
 		
 		JLabel lblCdPaciente = new JLabel("Código");
@@ -100,10 +98,6 @@ public class PnlExmEletro extends JPanel {
 		lblSexo.setBounds(311, 122, 39, 13);
 		add(lblSexo);
 		
-		JComboBox<String> sexo = new JComboBox<String>();
-		sexo.setBounds(311, 134, 153, 24);
-		add(sexo);
-		
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblTelefone.setBounds(24, 121, 70, 13);
@@ -119,10 +113,10 @@ public class PnlExmEletro extends JPanel {
 		lblConvnio.setBounds(165, 121, 80, 13);
 		add(lblConvnio);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(165, 135, 112, 23);
-		add(textField_6);
+		convenio = new JTextField();
+		convenio.setColumns(10);
+		convenio.setBounds(165, 135, 112, 23);
+		add(convenio);
 		
 		JLabel lblAltura = new JLabel("Altura:");
 		lblAltura.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -175,6 +169,118 @@ public class PnlExmEletro extends JPanel {
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(26, 265, 110, 24);
 		add(lblNewLabel_1);
+		
+		dataNasc = new JDateChooser();
+		dataNasc.setToolTipText("");
+		dataNasc.setName("Data de Nascimento");
+		dataNasc.setDateFormatString("dd/MM/yyyy");
+		dataNasc.setBounds(119, 37, 130, 23);
+		add(dataNasc);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(542, 548, 117, 25);
+		add(btnSalvar);
+		
+		sexo = new JTextField();
+		sexo.setColumns(10);
+		sexo.setBounds(311, 137, 112, 23);
+		add(sexo);
 
+	}
+
+	public JTextField getnExame() {
+		return nExame;
+	}
+
+	public void setnExame(JTextField nExame) {
+		this.nExame = nExame;
+	}
+
+	public JTextField getHora() {
+		return hora;
+	}
+
+	public void setHora(JTextField hora) {
+		this.hora = hora;
+	}
+
+	public JTextField getCodigoPaciente() {
+		return codigoPaciente;
+	}
+
+	public void setCodigoPaciente(JTextField codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
+	}
+
+	public JTextField getNome() {
+		return nome;
+	}
+
+	public void setNome(JTextField nome) {
+		this.nome = nome;
+	}
+
+	public JTextField getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(JTextField telefone) {
+		this.telefone = telefone;
+	}
+
+	public JTextField getTextField_6() {
+		return convenio;
+	}
+
+	public void setTextField_6(JTextField textField_6) {
+		this.convenio = textField_6;
+	}
+
+	public JTextField getAltura() {
+		return altura;
+	}
+
+	public void setAltura(JTextField altura) {
+		this.altura = altura;
+	}
+
+	public JTextField getPeso() {
+		return peso;
+	}
+
+	public void setPeso(JTextField peso) {
+		this.peso = peso;
+	}
+
+	public JTextField getIdade() {
+		return idade;
+	}
+
+	public void setIdade(JTextField idade) {
+		this.idade = idade;
+	}
+
+	public JTextField getSolicitante() {
+		return solicitante;
+	}
+
+	public void setSolicitante(JTextField solicitante) {
+		this.solicitante = solicitante;
+	}
+
+	public JTextField getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(JTextField sexo) {
+		this.sexo = sexo;
+	}
+
+	public JDateChooser getDataNasc() {
+		return dataNasc;
+	}
+
+	public void setDataNasc(JDateChooser dataNasc) {
+		this.dataNasc = dataNasc;
 	}
 }

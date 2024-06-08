@@ -2,20 +2,26 @@ package domain;
 
 import java.util.Objects;
 
+import enums.UsuarioEnum;
+
+
 public class Usuario {
 	private String nome;
     private String usuario;
     private String senha;
+    private UsuarioEnum tipo;
+    
     
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nome, String usuario, String senha) {
+	public Usuario(String nome, String usuario, String senha, UsuarioEnum tipo) {
 		super();
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
+		this.tipo = tipo;
 	}
 
 	public String getNome() {
@@ -42,14 +48,22 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public UsuarioEnum getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(UsuarioEnum tipo) {
+		this.tipo = tipo;
+	}
+	
 	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", usuario=" + usuario + ", senha=" + senha + "]";
+		return "Usuario [nome=" + nome + ", usuario=" + usuario + ", senha=" + senha + "tipo=" + tipo.descricao + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nome, senha, usuario);
+		return Objects.hash(nome, senha, usuario, tipo);
 	}
 
 	@Override
@@ -62,7 +76,7 @@ public class Usuario {
 			return false;
 		Usuario other = (Usuario) obj;
 		return Objects.equals(nome, other.nome) && Objects.equals(senha, other.senha)
-				&& Objects.equals(usuario, other.usuario);
+				&& Objects.equals(usuario, other.usuario) && tipo==other.tipo ;
 	}
 	
 	
