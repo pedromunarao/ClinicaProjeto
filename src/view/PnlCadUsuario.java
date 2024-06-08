@@ -5,17 +5,19 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class PnlCadUsuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField nome;
 	private JTextField email;
-	private JTextField senha;
-	private JTextField confSenha;
 	private JTextField crm;
 	private JTextField especializacao;
 	private JComboBox<String> tipo;
+	private JTextField id;
+	private JPasswordField Senha;
+	private JPasswordField confSenha;
 
 	/**
 	 * Create the panel.
@@ -32,16 +34,6 @@ public class PnlCadUsuario extends JPanel {
 		email.setColumns(10);
 		email.setBounds(12, 84, 250, 23);
 		add(email);
-		
-		senha = new JTextField();
-		senha.setColumns(10);
-		senha.setBounds(12, 137, 110, 23);
-		add(senha);
-		
-		confSenha = new JTextField();
-		confSenha.setColumns(10);
-		confSenha.setBounds(157, 137, 105, 23);
-		add(confSenha);
 		
 		tipo = new JComboBox<String>();
 		tipo.setBounds(290, 31, 153, 23);
@@ -97,8 +89,46 @@ public class PnlCadUsuario extends JPanel {
 		btnCancelar.setBounds(12, 186, 110, 25);
 		add(btnCancelar);
 		
+		id = new JTextField();
+		id.setVisible(false);
+		id.setBounds(71, 0, 114, 19);
+		add(id);
+		id.setColumns(10);
+		
+		Senha = new JPasswordField();
+		Senha.setBounds(12, 137, 110, 23);
+		add(Senha);
+		
+		confSenha = new JPasswordField();
+		confSenha.setBounds(157, 137, 110, 23);
+		add(confSenha);
+		
 		
 
+	}
+
+	public JTextField getId() {
+		return id;
+	}
+
+	public void setId(JTextField id) {
+		this.id = id;
+	}
+
+	public JPasswordField getSenha() {
+		return Senha;
+	}
+
+	public void setSenha(JPasswordField senha) {
+		Senha = senha;
+	}
+
+	public JPasswordField getConfSenha() {
+		return confSenha;
+	}
+
+	public void setConfSenha(JPasswordField confSenha) {
+		this.confSenha = confSenha;
 	}
 
 	public JTextField getNome() {
@@ -117,21 +147,7 @@ public class PnlCadUsuario extends JPanel {
 		this.email = email;
 	}
 
-	public JTextField getSenha() {
-		return senha;
-	}
-
-	public void setSenha(JTextField senha) {
-		this.senha = senha;
-	}
-
-	public JTextField getConfSenha() {
-		return confSenha;
-	}
-
-	public void setConfSenha(JTextField confSenha) {
-		this.confSenha = confSenha;
-	}
+	
 
 	public JTextField getCrm() {
 		return crm;

@@ -6,6 +6,7 @@ import enums.UsuarioEnum;
 
 
 public class Usuario {
+	private Integer id;
 	private String nome;
     private String usuario;
     private String senha;
@@ -22,6 +23,14 @@ public class Usuario {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.tipo = tipo;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -63,7 +72,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nome, senha, usuario, tipo);
+		return Objects.hash(id, nome, senha, usuario, tipo);
 	}
 
 	@Override

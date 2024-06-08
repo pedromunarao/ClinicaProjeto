@@ -93,7 +93,7 @@ public class PacienteDao {
 			stmt.setString(1, cpf);
 
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) { // Verifica se há uma linha no resultado
+			if (rs.next()) { 
 	            Paciente paciente = new Paciente();
 	            paciente.setId(rs.getInt("id"));
 	            paciente.setNome(rs.getString("nome"));
@@ -112,7 +112,6 @@ public class PacienteDao {
 	            stmt.close();
 	            return paciente;
 	        } else {
-	            // Se não houver linha, o paciente não foi encontrado
 	            return null;
 	        }			
 		}catch(SQLException e){
@@ -164,7 +163,7 @@ public class PacienteDao {
 		try {
 			
 			stmt = cnx.getConn().prepareStatement("delete from pacientes where id = (?)");
-			stmt.setInt(1, id);
+			stmt.setInt(0, id);
 			
 			stmt.execute();
 			stmt.close();

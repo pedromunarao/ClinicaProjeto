@@ -23,6 +23,7 @@ public class PacienteController {
 
 	
 	public void salvar(PnlCadPaciente pnl) {
+		pacienteDao = new PacienteDao();
 		paciente = new Paciente();
 		String telefoneValue = pnl.getTelefone().getText();
 		String telefoneLimpo = telefoneValue.replaceAll("[^\\d]", "");
@@ -53,16 +54,18 @@ public class PacienteController {
 	}
 	
 	public ArrayList<Paciente> consultar(){
+		pacienteDao = new PacienteDao();
 		return pacienteDao.consulta();
 	}
 	
 	public Paciente buscaPaciente(String cpf){
+		pacienteDao = new PacienteDao();
 		return pacienteDao.buscaPaciente(cpf);
 		
 	}
 	
 	public void atualizaPaciente(PnlCadPaciente pnl) {
-		
+		pacienteDao = new PacienteDao();
 		paciente = new Paciente();
 		String telefoneValue = pnl.getTelefone().getText();
 		String telefoneLimpo = telefoneValue.replaceAll("[^\\d]", "");
@@ -94,6 +97,7 @@ public class PacienteController {
 	}
 
 	public void excluirPaciente(PnlCadPaciente pnl) {
+		pacienteDao = new PacienteDao();
 		int resposta = JOptionPane.showConfirmDialog(pnl, "Confirma a Exclusão do Paciente?");
 		if (resposta == JOptionPane.YES_OPTION) {
 			
