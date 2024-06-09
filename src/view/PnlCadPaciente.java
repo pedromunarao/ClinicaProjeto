@@ -203,14 +203,14 @@ public class PnlCadPaciente extends JPanel {
 				try {
 					PacienteController pacienteController = new PacienteController();
 					
-					if (editando = true) {
+					if (editando) {
 						pacienteController.excluirPaciente(PnlCadPaciente.this);
 						
 					}
 					
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
 		            if (frame instanceof FrmCadPaciente) {
-		                ((FrmCadPaciente) frame).closeAndOpenSuccess();
+		                ((FrmCadPaciente) frame).closeAndOpen();
 		            }
 					
 				}catch(Exception ex) {
@@ -226,10 +226,10 @@ public class PnlCadPaciente extends JPanel {
 		btnCancelar.setVisible(false);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (editando = true) {
+				if (editando) {
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(PnlCadPaciente.this);
 		            if (frame instanceof FrmCadPaciente) {
-		                ((FrmCadPaciente) frame).closeAndOpenSuccess();
+		                ((FrmCadPaciente) frame).closeAndOpen();
 		            }
 				}
 			}

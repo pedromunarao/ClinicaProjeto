@@ -2,10 +2,17 @@ package view;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.UsuarioController;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PnlCadUsuario extends JPanel {
 
@@ -18,12 +25,14 @@ public class PnlCadUsuario extends JPanel {
 	private JTextField id;
 	private JPasswordField Senha;
 	private JPasswordField confSenha;
+	protected boolean editando;
 
 	/**
 	 * Create the panel.
 	 */
 	public PnlCadUsuario() {
 		setLayout(null);
+		editando = false;
 		
 		nome = new JTextField();
 		nome.setBounds(12, 31, 250, 23);
@@ -37,6 +46,7 @@ public class PnlCadUsuario extends JPanel {
 		
 		tipo = new JComboBox<String>();
 		tipo.setBounds(290, 31, 153, 23);
+		tipo.setModel(new DefaultComboBoxModel<String>(new String[] {"MÉDICO", "ATENDENTE", "ADMINISTRADOR"}));
 		add(tipo);
 		
 		crm = new JTextField();
@@ -78,14 +88,53 @@ public class PnlCadUsuario extends JPanel {
 		add(lblEspecializao);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					UsuarioController usuarioController = new UsuarioController();
+					
+					if (editando) {
+						usuarioController.atualizaUsuario(PnlCadUsuario.this);
+					}else {
+						usuarioController.salvar(PnlCadUsuario.this);
+					}
+					
+				}catch(RuntimeException ex) {
+					JOptionPane.showMessageDialog(PnlCadUsuario.this,  "Não foi possível salvar o usuário, verifique os dados e tente novamente!");
+					ex.printStackTrace();
+				}
+				
+			}
+		});
 		btnSalvar.setBounds(326, 186, 110, 25);
 		add(btnSalvar);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					UsuarioController usuarioController = new UsuarioController();
+					if (editando) {
+						usuarioController.excluirUsuario(PnlCadUsuario.this);
+					}
+					
+				}catch(RuntimeException ex) {
+					JOptionPane.showMessageDialog(PnlCadUsuario.this, "Não foi possível excluir, tente novamente");
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnExcluir.setVisible(false);
 		btnExcluir.setBounds(157, 186, 110, 25);
 		add(btnExcluir);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpaCampos(PnlCadUsuario.this);
+			}
+		});
+		btnCancelar.setVisible(false);
 		btnCancelar.setBounds(12, 186, 110, 25);
 		add(btnCancelar);
 		
@@ -171,5 +220,18 @@ public class PnlCadUsuario extends JPanel {
 
 	public void setTipo(JComboBox<String> tipo) {
 		this.tipo = tipo;
+	}
+	
+	public void limpaCampos(PnlCadUsuario pnl) {
+		pnl.getNome().setText("");
+		pnl.getId().setText("");
+		pnl.getSenha().setText("");
+		pnl.getConfSenha().setText("");
+		pnl.getEmail().setText("");
+		pnl.getCrm().setText("");
+		pnl.getCrm().setVisible(false);
+		pnl.getEspecializacao().setText("");
+		pnl.getEspecializacao().setVisible(false);
+		
 	}
 }

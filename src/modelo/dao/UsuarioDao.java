@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import domain.Medico;
 import domain.Usuario;
 import enums.UsuarioEnum;
+import exceptions.UsuarioNaoEncontradoException;
 
 public class UsuarioDao {
 	
@@ -16,18 +17,23 @@ public class UsuarioDao {
 		try {
 			PreparedStatement stmt = cnx.getConn().prepareStatement("INSERT INTO usuarios(nome, email, senha, tipo, crm, especializacao)"
 					+ " VALUES (?, ?, ?, ?, ?, ?)");
-			stmt.setString(0, usuario.getNome());
-			stmt.setString(1, usuario.getUsuario());
-			stmt.setString(2, usuario.getSenha());
-			stmt.setString(3, usuario.getTipo().descricao);
 			
 			if (usuario instanceof Medico) {
-				Medico medico = (Medico) usuario;
-				stmt.setString(4, medico.getCrm());
-				stmt.setString(5, medico.getEspecializacao());
+				Medico medico = new Medico();
+				medico = (Medico) usuario;
+				stmt.setString(1, medico.getNome());
+				stmt.setString(2, medico.getUsuario());
+				stmt.setString(3, medico.getSenha());
+				stmt.setString(4, medico.getTipo().descricao);
+				stmt.setString(5, medico.getCrm());
+				stmt.setString(6, medico.getEspecializacao());
 			}else {
-				stmt.setString(4, "");
+				stmt.setString(1, usuario.getNome());
+				stmt.setString(2, usuario.getUsuario());
+				stmt.setString(3, usuario.getSenha());
+				stmt.setString(4, usuario.getTipo().descricao);
 				stmt.setString(5, "");
+				stmt.setString(6, "");
 			}
 			
 			stmt.execute();
@@ -41,7 +47,7 @@ public class UsuarioDao {
 		
 	}
 	
-	public ArrayList<Usuario> Consultar(){
+	public ArrayList<Usuario> consultar(){
 		Conexao cnx = new Conexao();
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		try {
@@ -52,16 +58,19 @@ public class UsuarioDao {
 				usuario.setNome(rs.getString("nome"));
 				usuario.setUsuario(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
-				if (rs.getString("tipo") == "ATENDENTE") {
+				if (rs.getString("tipo").equals("Atendente")) {
 					usuario.setTipo(UsuarioEnum.ATENDENTE);
 					usuarios.add(usuario);
-				}else if(rs.getString("tipo") == "MEDICO") {
-					Medico medico = (Medico) usuario;
+				}else if(rs.getString("tipo").equals("Médico")) {
+					Medico medico = new Medico();
+					medico.setNome(rs.getString("nome"));
+					medico.setUsuario(rs.getString("email"));
+					medico.setSenha(rs.getString("senha"));
 					medico.setTipo(UsuarioEnum.MEDICO);
 					medico.setCrm(rs.getString("crm"));
 					medico.setEspecializacao(rs.getString("especializacao"));
 					usuarios.add(medico);
-				}else if (rs.getString("tipo") == "ADMINISTRADOR") {
+				}else {
 					usuario.setTipo(UsuarioEnum.ADMIN);
 					usuarios.add(usuario);
 				}	
@@ -78,7 +87,7 @@ public class UsuarioDao {
 		
 	}
 	
-	public Usuario buscaUsuario(String email){
+	public Usuario buscaUsuario(String email) throws UsuarioNaoEncontradoException{
 		Conexao cnx = new Conexao();
 		PreparedStatement stmt;
 		
@@ -86,31 +95,39 @@ public class UsuarioDao {
 			stmt = cnx.getConn().prepareStatement("select * from usuarios where email = (?)");
 			stmt.setString(1, email);
 			ResultSet rs = stmt.executeQuery();
-			Usuario usuario = new Usuario();
-			usuario.setId(rs.getInt("id"));
-			usuario.setNome(rs.getString("nome"));
-			usuario.setUsuario(rs.getString("email"));
-			usuario.setSenha(rs.getString("senha"));
-			if (rs.getString("tipo") == "ATENDENTE") {
-				usuario.setTipo(UsuarioEnum.ATENDENTE);
+			
+			if(rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setUsuario(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+				if (rs.getString("tipo").equals("Atendente")) {
+					usuario.setTipo(UsuarioEnum.ATENDENTE);
+					
+				}else if(rs.getString("tipo").equals("Médico")) {
+					Medico medico = new Medico();
+					medico.setNome(rs.getString("nome"));
+					medico.setUsuario(rs.getString("email"));
+					medico.setSenha(rs.getString("senha"));
+					medico.setTipo(UsuarioEnum.MEDICO);
+					medico.setCrm(rs.getString("crm"));
+					medico.setEspecializacao(rs.getString("especializacao"));
+					rs.close();
+					stmt.close();
+					return medico;
+					
+				}else if (rs.getString("tipo").equals("Administrador")) {
+					usuario.setTipo(UsuarioEnum.ADMIN);
+					
+				}
 				
-			}else if(rs.getString("tipo") == "MEDICO") {
-				Medico medico = (Medico) usuario;
-				medico.setTipo(UsuarioEnum.MEDICO);
-				medico.setCrm(rs.getString("crm"));
-				medico.setEspecializacao(rs.getString("especializacao"));
 				rs.close();
 				stmt.close();
-				return medico;
-				
-			}else if (rs.getString("tipo") == "ADMINISTRADOR") {
-				usuario.setTipo(UsuarioEnum.ADMIN);
-				
+				return usuario;
+			}else {
+				throw new UsuarioNaoEncontradoException();
 			}
-			
-			rs.close();
-			stmt.close();
-			return usuario;
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -123,22 +140,22 @@ public class UsuarioDao {
 		PreparedStatement stmt;
 		
 		try {
-			stmt = cnx.getConn().prepareStatement("update usuarios set nome = (?), usuario = (?), senha = (?), tipo = (?), "
+			stmt = cnx.getConn().prepareStatement("update usuarios set nome = (?), email = (?), senha = (?), tipo = (?), "
 					+ "crm = (?), especializacao = (?) where id = (?)");
-			stmt.setString(0, usuario.getNome());
-			stmt.setString(1, usuario.getUsuario());
-			stmt.setString(2, usuario.getSenha());
-			stmt.setString(3, usuario.getTipo().descricao);
+			stmt.setString(1, usuario.getNome());
+			stmt.setString(2, usuario.getUsuario());
+			stmt.setString(3, usuario.getSenha());
+			stmt.setString(4, usuario.getTipo().descricao);
 			
 			if (usuario instanceof Medico) {
 				Medico medico = (Medico) usuario;
-				stmt.setString(4, medico.getCrm());
-				stmt.setString(5, medico.getEspecializacao());
+				stmt.setString(5, medico.getCrm());
+				stmt.setString(6, medico.getEspecializacao());
 			}else {
-				stmt.setString(4, "");
 				stmt.setString(5, "");
+				stmt.setString(6, "");
 			}
-			stmt.setInt(6, (Integer) usuario.getId());
+			stmt.setInt(7, (Integer) usuario.getId());
 			
 			stmt.execute();
 			stmt.close();

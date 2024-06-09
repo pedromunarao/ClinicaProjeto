@@ -27,6 +27,7 @@ public class FrmPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private FrmCadPaciente frmCadPaciente;
+	private FrmCadUsuario frmCadUsuario;
 
 	/**
 	 * Launch the application.
@@ -98,14 +99,15 @@ public class FrmPrincipal extends JFrame {
 		LblPacientes.setBounds(26, 12, 70, 15);
 		PnlPacientes.add(LblPacientes);
 		
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setLayout(null);
-		panel_1_1.setBounds(0, 47, 126, 37);
-		PnlCadastros.add(panel_1_1);
+		JPanel PnlUsuarios = new JPanel();
 		
-		JLabel lblNewLabel_1 = new JLabel("Usuários");
-		lblNewLabel_1.setBounds(26, 12, 70, 15);
-		panel_1_1.add(lblNewLabel_1);
+		PnlUsuarios.setLayout(null);
+		PnlUsuarios.setBounds(0, 47, 126, 37);
+		PnlCadastros.add(PnlUsuarios);
+		
+		JLabel lblUsuarios = new JLabel("Usuários");
+		lblUsuarios.setBounds(26, 12, 70, 15);
+		PnlUsuarios.add(lblUsuarios);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(25, 25, 112));
@@ -192,5 +194,29 @@ public class FrmPrincipal extends JFrame {
 				
 			}
 		});
+		
+		PnlUsuarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (frmCadUsuario == null || !frmCadUsuario.isVisible()) {
+					frmCadUsuario = new FrmCadUsuario();
+					frmCadUsuario.setVisible(true);
+				}else {
+					frmCadUsuario.toFront();
+					frmCadUsuario.requestFocus();
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblUsuarios.setForeground(getForeground().WHITE);
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblUsuarios.setForeground(getForeground().BLACK);
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		
 	}
 }
