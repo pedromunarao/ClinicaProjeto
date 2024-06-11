@@ -22,12 +22,17 @@ import controller.UsuarioController;
 import domain.Medico;
 import domain.Usuario;
 import exceptions.UsuarioNaoEncontradoException;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class PnlConUsuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private PnlCadUsuario pnlCadUsuario;
+	private JTextField txtConsulta;
 
 	/**
 	 * Create the panel.
@@ -37,11 +42,24 @@ public class PnlConUsuario extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 450, 300);
+		scrollPane.setBounds(12, 66, 588, 403);
 		add(scrollPane);
 		
 		atualizaTabela();
 		scrollPane.setViewportView(table);
+		
+		txtConsulta = new JTextField();
+		txtConsulta.setBounds(12, 22, 304, 23);
+		add(txtConsulta);
+		txtConsulta.setColumns(10);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(348, 21, 117, 25);
+		add(btnPesquisar);
+		
+		JLabel lblConsultar = new JLabel("Consultar");
+		lblConsultar.setBounds(12, 9, 70, 15);
+		add(lblConsultar);
 
 	}
 	

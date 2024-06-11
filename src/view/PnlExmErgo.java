@@ -8,6 +8,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.DropMode;
 
 public class PnlExmErgo extends JPanel {
 
@@ -21,9 +25,6 @@ public class PnlExmErgo extends JPanel {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField txtLk;
 
 	/**
 	 * Create the panel.
@@ -31,157 +32,140 @@ public class PnlExmErgo extends JPanel {
 	public PnlExmErgo() {
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Número do Exame:");
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel.setBounds(29, 40, 110, 13);
+		JLabel lblNewLabel = new JLabel("N.Exame:");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel.setBounds(29, 26, 67, 13);
 		add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(149, 38, 67, 19);
+		textField.setBounds(29, 38, 67, 23);
 		add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblData = new JLabel("Data:");
-		lblData.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblData.setBounds(247, 41, 33, 13);
+		lblData.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblData.setBounds(123, 26, 40, 13);
 		add(lblData);
+		
+		JDateChooser dataNasc = new JDateChooser();
+		dataNasc.setToolTipText("");
+		dataNasc.setName("Data de Nascimento");
+		dataNasc.setDateFormatString("dd/MM/yyyy");
+		dataNasc.setBounds(123, 40, 130, 23);
+		add(dataNasc);
+		
+		JLabel lblHora = new JLabel("Hora:");
+		lblHora.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblHora.setBounds(280, 26, 40, 13);
+		add(lblHora);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(290, 38, 67, 19);
+		textField_1.setBounds(280, 40, 67, 23);
 		add(textField_1);
 		
-		JLabel lblHora = new JLabel("Hora:");
-		lblHora.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblHora.setBounds(389, 41, 46, 13);
-		add(lblHora);
+		JLabel lblCdPaciente = new JLabel("Código");
+		lblCdPaciente.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblCdPaciente.setBounds(29, 75, 60, 13);
+		add(lblCdPaciente);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(432, 38, 67, 19);
+		textField_2.setBounds(29, 89, 67, 23);
 		add(textField_2);
 		
-		JLabel lblCdPaciente = new JLabel("Cód. Paciente:");
-		lblCdPaciente.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblCdPaciente.setBounds(29, 89, 110, 13);
-		add(lblCdPaciente);
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNome.setBounds(122, 75, 50, 13);
+		add(lblNome);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(122, 87, 60, 19);
+		textField_3.setBounds(122, 89, 429, 23);
 		add(textField_3);
 		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNome.setBounds(202, 90, 110, 13);
-		add(lblNome);
+		JLabel lblConvnio = new JLabel("Convênio:");
+		lblConvnio.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblConvnio.setBounds(29, 124, 80, 13);
+		add(lblConvnio);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(247, 87, 429, 19);
+		textField_4.setBounds(29, 138, 112, 23);
 		add(textField_4);
 		
+		JComboBox<String> sexo = new JComboBox<String>();
+		sexo.setBounds(175, 137, 153, 24);
+		add(sexo);
+		
+		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSexo.setBounds(175, 125, 39, 13);
+		add(lblSexo);
+		
 		JLabel lblAltura = new JLabel("Altura:");
-		lblAltura.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblAltura.setBounds(29, 206, 39, 13);
+		lblAltura.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblAltura.setBounds(29, 173, 60, 13);
 		add(lblAltura);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(78, 204, 60, 19);
+		textField_5.setBounds(29, 187, 67, 23);
 		add(textField_5);
 		
 		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblPeso.setBounds(29, 238, 39, 13);
+		lblPeso.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblPeso.setBounds(123, 173, 60, 13);
 		add(lblPeso);
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(79, 236, 60, 19);
+		textField_6.setBounds(122, 187, 67, 23);
 		add(textField_6);
 		
 		JLabel lblIdade = new JLabel("Idade:");
-		lblIdade.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblIdade.setBounds(29, 272, 39, 13);
+		lblIdade.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblIdade.setBounds(213, 173, 60, 13);
 		add(lblIdade);
 		
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
-		textField_7.setBounds(78, 270, 60, 19);
+		textField_7.setBounds(213, 187, 67, 23);
 		add(textField_7);
 		
-		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblSexo.setBounds(443, 133, 39, 13);
-		add(lblSexo);
+		JCheckBox chckbxFumante = new JCheckBox("Fumante");
+		chckbxFumante.setBounds(306, 187, 102, 23);
+		add(chckbxFumante);
 		
-		JComboBox<String> sexo = new JComboBox<String>();
-		sexo.setModel(new DefaultComboBoxModel<String>(new String[] {"MASCULINO", "FEMININO", "OUTROS"}));
-		sexo.setBounds(492, 128, 153, 24);
-		add(sexo);
+		JCheckBox chckbxMarcapa = new JCheckBox("Marcapasso");
+		chckbxMarcapa.setBounds(412, 187, 139, 23);
+		add(chckbxMarcapa);
 		
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblTelefone.setBounds(29, 135, 60, 13);
-		add(lblTelefone);
+		JLabel lblSolicitante = new JLabel("Solicitante:");
+		lblSolicitante.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSolicitante.setBounds(29, 222, 90, 13);
+		add(lblSolicitante);
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(89, 133, 112, 19);
+		textField_8.setBounds(29, 235, 352, 23);
 		add(textField_8);
 		
-		JLabel lblConvnio = new JLabel("Convênio:");
-		lblConvnio.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblConvnio.setBounds(234, 136, 60, 13);
-		add(lblConvnio);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(28, 283, 549, 119);
+		add(scrollPane);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(304, 133, 112, 19);
-		add(textField_9);
-		
-		JLabel lblFumw = new JLabel("Fumante?");
-		lblFumw.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblFumw.setBounds(212, 206, 82, 13);
-		add(lblFumw);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Sim");
-		chckbxNewCheckBox.setBounds(311, 203, 77, 21);
-		add(chckbxNewCheckBox);
-		
-		JLabel lblMarcaPasso = new JLabel("Marca Passo?");
-		lblMarcaPasso.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblMarcaPasso.setBounds(212, 237, 100, 13);
-		add(lblMarcaPasso);
-		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Sim");
-		chckbxNewCheckBox_1.setBounds(311, 234, 77, 21);
-		add(chckbxNewCheckBox_1);
-		
-		JLabel lblSolicitante = new JLabel("Solicitante:");
-		lblSolicitante.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblSolicitante.setBounds(29, 312, 67, 13);
-		add(lblSolicitante);
-		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(104, 310, 352, 19);
-		add(textField_10);
+		JTextArea textArea = new JTextArea();
+		textArea.setDropMode(DropMode.INSERT_ROWS);
+		scrollPane.setViewportView(textArea);
 		
 		JLabel lblObservaes = new JLabel("Observações:");
-		lblObservaes.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblObservaes.setBounds(29, 356, 82, 13);
+		lblObservaes.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblObservaes.setBounds(29, 270, 125, 13);
 		add(lblObservaes);
 		
-		txtLk = new JTextField();
-		txtLk.setBounds(29, 380, 427, 138);
-		add(txtLk);
-		txtLk.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Salvar");
-		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnNewButton.setBounds(560, 476, 85, 21);
+		btnNewButton.setBounds(460, 428, 117, 25);
 		add(btnNewButton);
 
 	}

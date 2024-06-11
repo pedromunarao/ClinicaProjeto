@@ -25,6 +25,8 @@ import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.DropMode;
 
 public class PnlExmEletro extends JPanel {
 
@@ -33,14 +35,15 @@ public class PnlExmEletro extends JPanel {
 	private JTextField hora;
 	private JTextField codigoPaciente;
 	private JTextField nome;
-	private JTextField telefone;
 	private JTextField convenio;
 	private JTextField altura;
 	private JTextField peso;
 	private JTextField idade;
 	private JTextField solicitante;
 	private JDateChooser dataNasc; 
-	private JTextField sexo;
+	private JTextField textField;
+	private JTextField textField_1;
+	JComboBox<String> sexo;
 
 	/**
 	 * Create the panel.
@@ -95,27 +98,17 @@ public class PnlExmEletro extends JPanel {
 		
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblSexo.setBounds(311, 122, 39, 13);
+		lblSexo.setBounds(172, 122, 39, 13);
 		add(lblSexo);
-		
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblTelefone.setBounds(24, 121, 70, 13);
-		add(lblTelefone);
-		
-		telefone = new JTextField();
-		telefone.setColumns(10);
-		telefone.setBounds(26, 135, 112, 23);
-		add(telefone);
 		
 		JLabel lblConvnio = new JLabel("Convênio:");
 		lblConvnio.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblConvnio.setBounds(165, 121, 80, 13);
+		lblConvnio.setBounds(26, 121, 80, 13);
 		add(lblConvnio);
 		
 		convenio = new JTextField();
 		convenio.setColumns(10);
-		convenio.setBounds(165, 135, 112, 23);
+		convenio.setBounds(26, 135, 112, 23);
 		add(convenio);
 		
 		JLabel lblAltura = new JLabel("Altura:");
@@ -163,6 +156,48 @@ public class PnlExmEletro extends JPanel {
 		panel.setToolTipText("");
 		panel.setBounds(26, 288, 633, 248);
 		add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblRitmo = new JLabel("Ritmo:");
+		lblRitmo.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblRitmo.setBounds(12, 12, 60, 13);
+		panel.add(lblRitmo);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(12, 26, 150, 23);
+		panel.add(textField);
+		
+		JLabel lblFc = new JLabel("F.C:");
+		lblFc.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblFc.setBounds(200, 12, 60, 13);
+		panel.add(lblFc);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(200, 26, 150, 23);
+		panel.add(textField_1);
+		
+		JLabel lblConcluses = new JLabel("Conclusões:");
+		lblConcluses.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblConcluses.setBounds(12, 137, 132, 13);
+		panel.add(lblConcluses);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 61, 609, 64);
+		panel.add(scrollPane);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setDropMode(DropMode.INSERT_ROWS);
+		scrollPane.setViewportView(textArea);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 157, 609, 64);
+		panel.add(scrollPane_1);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setDropMode(DropMode.INSERT_ROWS);
+		scrollPane_1.setViewportView(textArea_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Relatório");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -181,10 +216,17 @@ public class PnlExmEletro extends JPanel {
 		btnSalvar.setBounds(542, 548, 117, 25);
 		add(btnSalvar);
 		
-		sexo = new JTextField();
-		sexo.setColumns(10);
-		sexo.setBounds(311, 137, 112, 23);
+		 sexo = new JComboBox<String>();
+		sexo.setBounds(172, 134, 153, 24);
 		add(sexo);
+		
+		JCheckBox chckbxFumante = new JCheckBox("Fumante");
+		chckbxFumante.setBounds(303, 184, 102, 23);
+		add(chckbxFumante);
+		
+		JCheckBox chckbxMarcapa = new JCheckBox("Marcapasso");
+		chckbxMarcapa.setBounds(409, 184, 139, 23);
+		add(chckbxMarcapa);
 
 	}
 
@@ -218,14 +260,6 @@ public class PnlExmEletro extends JPanel {
 
 	public void setNome(JTextField nome) {
 		this.nome = nome;
-	}
-
-	public JTextField getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(JTextField telefone) {
-		this.telefone = telefone;
 	}
 
 	public JTextField getTextField_6() {
@@ -268,11 +302,11 @@ public class PnlExmEletro extends JPanel {
 		this.solicitante = solicitante;
 	}
 
-	public JTextField getSexo() {
+	public JComboBox<String> getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(JTextField sexo) {
+	public void setSexo(JComboBox<String> sexo) {
 		this.sexo = sexo;
 	}
 
