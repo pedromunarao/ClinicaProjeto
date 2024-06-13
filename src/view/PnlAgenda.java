@@ -12,7 +12,7 @@ public class PnlAgenda extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JCalendar calendario;
-	private J
+	
 	/**
 	 * Create the panel.
 	 */

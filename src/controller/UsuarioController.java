@@ -103,8 +103,13 @@ public class UsuarioController {
 		int resposta = JOptionPane.showConfirmDialog(pnl, "Confirma a exclusão deste usuário?");
 		
 		if (resposta == JOptionPane.YES_OPTION) {
-			usuarioDao.excluirUsuario(Integer.parseInt(pnl.getId().getText()));
+			usuarioDao.excluirUsuario(Integer.parseInt(pnl.getId().getText()));	
 		}
+		
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(pnl);
+        if (frame instanceof FrmCadUsuario) {
+            ((FrmCadUsuario) frame).closeAndOpenSuccess();
+        }
 	}
 
 }

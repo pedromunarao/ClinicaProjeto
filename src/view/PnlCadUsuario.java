@@ -26,6 +26,8 @@ public class PnlCadUsuario extends JPanel {
 	private JPasswordField Senha;
 	private JPasswordField confSenha;
 	protected boolean editando;
+	private JButton btnExcluir;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
@@ -45,6 +47,22 @@ public class PnlCadUsuario extends JPanel {
 		add(email);
 		
 		tipo = new JComboBox<String>();
+		tipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selecionado = (String) tipo.getSelectedItem();
+				
+				switch (selecionado) {
+					case "MÉDICO":
+						crm.setEnabled(true);
+						especializacao.setEnabled(true);
+						break;
+					default:
+						crm.setEnabled(false);
+						especializacao.setEnabled(false);
+						break;
+				}
+			}
+		});
 		tipo.setBounds(290, 31, 153, 23);
 		tipo.setModel(new DefaultComboBoxModel<String>(new String[] {"MÉDICO", "ATENDENTE", "ADMINISTRADOR"}));
 		add(tipo);
@@ -109,7 +127,7 @@ public class PnlCadUsuario extends JPanel {
 		btnSalvar.setBounds(326, 186, 110, 25);
 		add(btnSalvar);
 		
-		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -128,7 +146,7 @@ public class PnlCadUsuario extends JPanel {
 		btnExcluir.setBounds(157, 186, 110, 25);
 		add(btnExcluir);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpaCampos(PnlCadUsuario.this);
@@ -228,10 +246,21 @@ public class PnlCadUsuario extends JPanel {
 		pnl.getSenha().setText("");
 		pnl.getConfSenha().setText("");
 		pnl.getEmail().setText("");
+		pnl.getTipo().setSelectedIndex(0);
 		pnl.getCrm().setText("");
-		pnl.getCrm().setVisible(false);
+		pnl.getCrm().setEnabled(false);
 		pnl.getEspecializacao().setText("");
-		pnl.getEspecializacao().setVisible(false);
+		pnl.getEspecializacao().setEnabled(false);
+		pnl.btnCancelar.setVisible(false);
+		pnl.btnExcluir.setVisible(false);
+		
+	}
+	
+	public void mudaBotao() {
+		if(editando) {
+			btnExcluir.setVisible(true);
+			btnCancelar.setVisible(true);
+		}
 		
 	}
 }

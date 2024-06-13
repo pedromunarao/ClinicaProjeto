@@ -9,7 +9,7 @@ public class Conexao {
 	
 	public Conexao() {
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Clinica", "root", "");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Clinica", "root", "123");
 		} catch (SQLException e) {
 			System.out.println("Erro na conexão com o banco!");
 			e.printStackTrace();

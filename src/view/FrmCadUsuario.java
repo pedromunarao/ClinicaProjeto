@@ -37,7 +37,7 @@ public class FrmCadUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmCadUsuario() {
-		setBounds(100, 100, 646, 516);
+		setBounds(500, 150, 646, 516);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

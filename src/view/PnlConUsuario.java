@@ -79,12 +79,12 @@ public class PnlConUsuario extends JPanel {
 				if(e.getClickCount() == 2) {
 					try {
 						Usuario usuarioConsulta = new UsuarioController().buscarUsuario((String) (table.getValueAt(table.getSelectedRow(), 1)));
-//						pnlCadUsuario.getId().setText(usuarioConsulta.getId().toString());
+						pnlCadUsuario.getId().setText(usuarioConsulta.getId().toString());
 						pnlCadUsuario.getNome().setText(usuarioConsulta.getNome());
 						pnlCadUsuario.getEmail().setText(usuarioConsulta.getUsuario());
 						pnlCadUsuario.getSenha().setText(usuarioConsulta.getSenha());
 						for(int i = 0; i < pnlCadUsuario.getTipo().getItemCount(); i++) {
-							if(pnlCadUsuario.getTipo().getItemAt(i).equals(usuarioConsulta.getTipo().descricao)) {
+							if(pnlCadUsuario.getTipo().getItemAt(i).equals(usuarioConsulta.getTipo().descricao.toUpperCase())) {
 								pnlCadUsuario.getTipo().setSelectedIndex(i);
 								break;
 							}
@@ -114,8 +114,10 @@ public class PnlConUsuario extends JPanel {
 						        if (tabbedPane != null) {
 						            tabbedPane.setSelectedIndex(0);
 						            pnlCadUsuario.editando = true;
+						            pnlCadUsuario.mudaBotao();
 						        }
 						    }
+						    
 						}
 						
 					}catch(UsuarioNaoEncontradoException error) {

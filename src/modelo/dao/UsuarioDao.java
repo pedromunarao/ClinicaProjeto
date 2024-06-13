@@ -32,8 +32,8 @@ public class UsuarioDao {
 				stmt.setString(2, usuario.getUsuario());
 				stmt.setString(3, usuario.getSenha());
 				stmt.setString(4, usuario.getTipo().descricao);
-				stmt.setString(5, "");
-				stmt.setString(6, "");
+				stmt.setString(5, null);
+				stmt.setString(6, null);
 			}
 			
 			stmt.execute();
@@ -107,6 +107,7 @@ public class UsuarioDao {
 					
 				}else if(rs.getString("tipo").equals("Médico")) {
 					Medico medico = new Medico();
+					medico.setId(rs.getInt("id"));
 					medico.setNome(rs.getString("nome"));
 					medico.setUsuario(rs.getString("email"));
 					medico.setSenha(rs.getString("senha"));
@@ -171,7 +172,7 @@ public class UsuarioDao {
 		
 		try {
 			stmt = cnx.getConn().prepareStatement("delete from usuarios where id = (?)");
-			stmt.setInt(0, id);
+			stmt.setInt(1, id);
 			
 			stmt.execute();
 			stmt.close();	
