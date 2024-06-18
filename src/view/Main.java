@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+import view.FrmPrincipal;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
 	
 	private void IniciarApp() {
 //		FrmCadPaciente frame = new FrmCadPaciente();
-		FrmPrincipal frame = new FrmPrincipal();
+		FrmLogin frame = new FrmLogin();
 		frame.setVisible(true);
 	}
 

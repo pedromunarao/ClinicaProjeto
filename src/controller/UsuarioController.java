@@ -11,10 +11,12 @@ import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 import domain.Medico;
 import domain.Usuario;
 import enums.UsuarioEnum;
+import exceptions.LoginException;
 import exceptions.UsuarioNaoEncontradoException;
 import modelo.dao.UsuarioDao;
 import view.FrmCadPaciente;
 import view.FrmCadUsuario;
+import view.FrmLogin;
 import view.PnlCadUsuario;
 
 public class UsuarioController {
@@ -111,5 +113,21 @@ public class UsuarioController {
             ((FrmCadUsuario) frame).closeAndOpenSuccess();
         }
 	}
+	
+	public boolean login(FrmLogin login) {
+        usuarioDao = new UsuarioDao();
+        try {
+        	usuarioDao.login(login.getTextFieldUsuario().getText(), login.getTextFieldSenha().getText());
+            JOptionPane.showMessageDialog(login, "Login bem-sucedido! Bem-vindo");
+            return true;
+            
+        } catch (LoginException e) {
+            JOptionPane.showMessageDialog(login, e.getMessage());
+            return false;
+        }
+    }
+
+	
+	
 
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import domain.Medico;
 import domain.Usuario;
 import enums.UsuarioEnum;
+import exceptions.LoginException;
 import exceptions.UsuarioNaoEncontradoException;
 
 public class UsuarioDao {
@@ -182,5 +183,54 @@ public class UsuarioDao {
 		}
 		
 	}
+	
+	public boolean login(String nomeUsuario, String senha) throws LoginException {
+        Conexao cnx = new Conexao();
+        PreparedStatement stmt;
+        try {
+            stmt = cnx.getConn().prepareStatement("SELECT * FROM usuarios WHERE email = ? or nome = ?");
+            stmt.setString(1, nomeUsuario);
+            stmt.setString(2, nomeUsuario);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setUsuario(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                String tipo = rs.getString("tipo");
+                if (tipo.equals("Atendente")) {
+                    usuario.setTipo(UsuarioEnum.ATENDENTE);
+                } else if (tipo.equals("Médico")) {
+                    Medico medico = new Medico();
+                    medico.setId(rs.getInt("id"));
+                    medico.setNome(rs.getString("nome"));
+                    medico.setUsuario(rs.getString("email"));
+                    medico.setSenha(rs.getString("senha"));
+                    medico.setTipo(UsuarioEnum.MEDICO);
+                    medico.setCrm(rs.getString("crm"));
+                    medico.setEspecializacao(rs.getString("especializacao"));
+                    rs.close();
+                    stmt.close();
+                    return true;
+                } else if (tipo.equals("Administrador")) {
+                    usuario.setTipo(UsuarioEnum.ADMIN);
+                }
+                rs.close();
+                stmt.close();
+                if (usuario.getSenha().equals(senha)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                throw new LoginException();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
