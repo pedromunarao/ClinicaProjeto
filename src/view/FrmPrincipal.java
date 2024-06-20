@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTree;
 import java.awt.Color;
+import java.awt.Font;
 
 public class FrmPrincipal extends JFrame {
 
@@ -51,7 +52,7 @@ public class FrmPrincipal extends JFrame {
 	public FrmPrincipal() {
 		setTitle("Principal");
 		setDefaultCloseOperation(FrmPrincipal.EXIT_ON_CLOSE);
-		setBounds(400, 100, 1360, 768);
+		setBounds(100, 50, 1360, 768);
 		contentPane = new JPanel();
 		contentPane.setAlignmentY(Component.CENTER_ALIGNMENT);
 		contentPane.setBackground(UIManager.getColor("Menu.acceleratorForeground"));
@@ -145,6 +146,11 @@ public class FrmPrincipal extends JFrame {
 		});
 			lblCadastro.setBounds(12, 12, 70, 15);
 			PnlCadastro.add(lblCadastro);
+			
+			JLabel lblNewLabel = new JLabel("Clinica Médica");
+			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+			lblNewLabel.setBounds(619, 10, 224, 21);
+			panel.add(lblNewLabel);
 		
 		
 		PnlCadastro.addMouseListener(new MouseAdapter() {

@@ -49,7 +49,7 @@ public class FrmLogin extends JFrame {
 	 */
 	public FrmLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 698, 437);
+		setBounds(650, 300, 306, 233);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -57,7 +57,7 @@ public class FrmLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 674, 390);
+		panel.setBounds(0, 0, 301, 197);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
